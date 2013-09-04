@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Allgemeine Informationen</legend>
+    <table class="table table-striped">
+        <tr>
+            <td><label class="control-label">Name</label></td>
+            <td><p class="form-control-static">{{ user.first_name }} {{ user.last_name }}</p></td>
+        </tr>
+        <tr>
+            <td><label for="inputTest" class="control-label">Test</label></td>
+            <td><input type="text" class="form-control" id="inputTest" placeholder="Test" /></td>
+        </tr>
+    </table>
+  </fieldset>
+  
+  <fieldset>
+    <legend>Schülerumfrage</legend>
+  </fieldset>
+  <fieldset>
+    <legend>Lehrerumfrage</legend>
+  </fieldset>
+</form>
+
+{% endblock %}
