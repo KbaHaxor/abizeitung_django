@@ -1,12 +1,11 @@
 from abizeitung.models import Teacher, StudentSurvey, Student, TeacherSurvey
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.forms.fields import ChoiceField, CharField
+from django.forms.fields import ChoiceField
 from django.forms.models import ModelForm
 from django.forms.widgets import Select
 from django.shortcuts import render
 from django.template.context import RequestContext
-from django.contrib import messages
 
 class StudentEditForm(ModelForm):
     class Meta:
@@ -42,10 +41,9 @@ class StudentEditForm(ModelForm):
 @login_required
 def edit(request):
     context = {}
-    form = StudentEditForm(request.POST, instance=request.user)
+    form = StudentEditForm(request.POST or None, instance=Student.objects.get(user=request.user))
     if request.method == "POST":
         if form.is_valid():
-            messages.error(request, "OK")
             form.save()
         else:
             messages.error(request, "Konnte Daten nicht speichern!")

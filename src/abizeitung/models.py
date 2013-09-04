@@ -12,6 +12,7 @@ class Student(models.Model):
         verbose_name_plural = u"Schüler"
     
     user = models.OneToOneField(User, verbose_name="Benutzer")
+    test = models.CharField(default="", blank=True, max_length=255, verbose_name="Test")
     
     def fullname(self):
         return self.user.first_name + " " + self.user.last_name
