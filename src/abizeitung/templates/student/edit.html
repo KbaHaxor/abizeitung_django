@@ -2,18 +2,26 @@
 
 {% block content %}
 
-<form class="form-horizontal">
+<form class="form-horizontal" action="/student" method="post">
+  {% csrf_token %}
+
   <fieldset>
     <legend>Allgemeine Informationen</legend>
     <table class="table table-striped">
+        {{ form.errors }}
+    
         <tr>
             <td><label class="control-label">Name</label></td>
             <td><p class="form-control-static">{{ user.first_name }} {{ user.last_name }}</p></td>
         </tr>
+        {% for field in form %}
+        {% if not field.is_teacher %}
         <tr>
-            <td><label for="inputTest" class="control-label">Test</label></td>
-            <td><input type="text" class="form-control" id="inputTest" placeholder="Test" /></td>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}</td>
         </tr>
+        {% endif %}
+        {% endfor %}
     </table>
   </fieldset>
   
@@ -23,6 +31,8 @@
   <fieldset>
     <legend>Lehrerumfrage</legend>
   </fieldset>
+  
+  <button type="submit" class="btn btn-default">Speichern</button>
 </form>
 
 {% endblock %}

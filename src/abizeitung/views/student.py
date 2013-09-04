@@ -1,15 +1,22 @@
 from abizeitung.models import Teacher, StudentSurvey, Student, TeacherSurvey
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.forms.fields import ChoiceField
-from django.forms.forms import Form
+from django.forms.fields import ChoiceField, CharField
+from django.forms.models import ModelForm
+from django.forms.widgets import Select
 from django.shortcuts import render
 from django.template.context import RequestContext
+from django.contrib import messages
 
-class StudentEditForm(Form):
+class StudentEditForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = ["test", ]
     
     def __init__(self, *args, **kwargs):
         super(StudentEditForm, self).__init__(*args, **kwargs)
+        
+        self.fields["test"].widget.attrs["class"] = "form-control"
         
         self.student_choices = []
         for student in Student.objects.all():
@@ -20,22 +27,27 @@ class StudentEditForm(Form):
         
         self.student_surveys = []
         for survey in StudentSurvey.objects.all():
-            field = ChoiceField(label=survey.title, choices=self.student_choices)
+            field = ChoiceField(label=survey.title, choices=self.student_choices, widget=Select(attrs={"class" : "form-control"}))
             name = "student_survey_%s" % survey.id
             self.fields[name] = field
             self.student_surveys.append(self.fields[name])
         
         self.teacher_surveys = []
         for survey in TeacherSurvey.objects.all():
-            field = ChoiceField(label=survey.title, choices=self.teacher_choices)
+            field = ChoiceField(label=survey.title, choices=self.teacher_choices, widget=Select(attrs={"class" : "form-control"}))
             name = "teacher_survey_%s" % survey.id
-            self.teacher_surveys.append(name)
             self.fields[name] = field
+            self.teacher_surveys.append(name)
 
 @login_required
 def edit(request):
     context = {}
-    context["form"] = StudentEditForm()
-    context["students"] = User.objects.all()
-    context["teachers"] = Teacher.objects.all()
+    form = StudentEditForm(request.POST, instance=request.user)
+    if request.method == "POST":
+        if form.is_valid():
+            messages.error(request, "OK")
+            form.save()
+        else:
+            messages.error(request, "Konnte Daten nicht speichern!")
+    context["form"] = form
     return render(request, "student/edit.html", context, context_instance=RequestContext(request))
