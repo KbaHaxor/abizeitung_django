@@ -10,7 +10,7 @@
   {{ form.errors }}
 
   <fieldset>
-    <legend>Allgemeine Informationen</legend>
+    <legend>Steckbrief</legend>
     <table class="table table-striped">
         <tr>
             <td class="form-left"><label class="control-label">Name</label></td>
@@ -28,7 +28,7 @@
   </fieldset>
   
   <fieldset>
-    <legend>Schülerumfrage</legend>
+    <legend>Schülertitel</legend>
     <table class="table table-striped">
     {% for field in form %}
         {% if field.auto_id|startswith:"id_student_survey" %}
@@ -41,7 +41,7 @@
     </table>
   </fieldset>
   <fieldset>
-    <legend>Lehrerumfrage</legend>
+    <legend>Lehrertitel</legend>
     <table class="table table-striped">
     {% for field in form %}
         {% if field.auto_id|startswith:"id_teacher_survey" %}
