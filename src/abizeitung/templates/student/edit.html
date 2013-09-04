@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 
+{% load abizeitung_tags %}
+
 {% block content %}
 
 <form class="form-horizontal" action="/student" method="post">
   {% csrf_token %}
 
+  {{ form.errors }}
+
   <fieldset>
     <legend>Allgemeine Informationen</legend>
     <table class="table table-striped">
-        {{ form.errors }}
-    
         <tr>
             <td><label class="control-label">Name</label></td>
             <td><p class="form-control-static">{{ user.first_name }} {{ user.last_name }}</p></td>
         </tr>
         {% for field in form %}
-        {% if not field.is_teacher %}
+        {% if not field.auto_id|startswith:"id_teacher_survey" and not field.auto_id|startswith:"id_student_survey" %}
         <tr>
             <td>{{ field.label_tag }}</td>
             <td>{{ field }}</td>
@@ -27,9 +29,29 @@
   
   <fieldset>
     <legend>Schülerumfrage</legend>
+    <table class="table table-striped">
+    {% for field in form %}
+        {% if field.auto_id|startswith:"id_student_survey" %}
+        <tr>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
   </fieldset>
   <fieldset>
     <legend>Lehrerumfrage</legend>
+    <table class="table table-striped">
+    {% for field in form %}
+        {% if field.auto_id|startswith:"id_teacher_survey" %}
+        <tr>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}</td>
+        </tr>
+        {% endif %}
+     {% endfor %}
+     </table>
   </fieldset>
   
   <button type="submit" class="btn btn-default">Speichern</button>

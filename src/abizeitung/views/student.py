@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from abizeitung.models import Teacher, StudentSurvey, Student, TeacherSurvey
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -17,10 +19,10 @@ class StudentEditForm(ModelForm):
         
         self.fields["test"].widget.attrs["class"] = "form-control"
         
-        self.student_choices = []
+        self.student_choices = [(-1, u"Bitte jemanden auswählen.")]
         for student in Student.objects.all():
             self.student_choices.append((student.id, student.fullname()))
-        self.teacher_choices = []
+        self.teacher_choices = [(-1, u"Bitte jemanden auswählen.")]
         for teacher in Teacher.objects.all():
             self.teacher_choices.append((teacher.id, teacher.fullname()))
         
