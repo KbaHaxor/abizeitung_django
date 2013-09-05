@@ -1,5 +1,7 @@
 from abizeitung_site.settings import *
 
+USER_PASSWORD_SECRET = "Sonne2013"
+
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 

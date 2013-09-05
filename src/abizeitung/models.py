@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.db import models
 from django.db.models import signals
-
 import hashlib
+
 
 class Student(models.Model):
     class Meta:
@@ -20,7 +21,7 @@ class Student(models.Model):
     
     def get_password(self):
         plain  = "%s.%s" % (self.user.first_name.lower(), self.user.last_name.lower())
-        plain += "Sonne2013" 
+        plain += getattr(settings, "USER_PASSWORD_SECRET")
         return hashlib.md5(plain).hexdigest()[:8]
     
     def __unicode__(self):
