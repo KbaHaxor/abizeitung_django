@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -8,8 +8,8 @@ import hashlib
 
 class Student(models.Model):
     class Meta:
-        verbose_name = u"Schüler"
-        verbose_name_plural = u"Schüler"
+        verbose_name = u"SchÃ¼ler"
+        verbose_name_plural = u"SchÃ¼ler"
     
     user = models.OneToOneField(User, verbose_name="Benutzer")
     test = models.CharField(default="", blank=True, max_length=255, verbose_name="Test")
@@ -24,7 +24,7 @@ class Student(models.Model):
         return hashlib.md5(plain).hexdigest()[:8]
     
     def __unicode__(self):
-        return u"Schüler %s - %s" % (self.user, self.get_password())
+        return u"SchÃ¼ler %s - %s" % (self.user, self.get_password())
 
 class Teacher(models.Model):
     class Meta:
@@ -43,8 +43,8 @@ class Teacher(models.Model):
 
 class StudentSurvey(models.Model):
     class Meta:
-        verbose_name = u"Schülerumfrage"
-        verbose_name_plural = u"Schülerumfragen"
+        verbose_name = u"SchÃ¼lerumfrage"
+        verbose_name_plural = u"SchÃ¼lerumfragen"
     
     title = models.CharField(max_length=255, verbose_name="Titel")
 
