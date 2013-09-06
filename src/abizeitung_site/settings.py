@@ -2,9 +2,6 @@ import os
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 
-USER_PASSWORD_SECRET = "Sonne2013"
-
-
 # Django settings for abizeitung project.
 
 DEBUG = True

@@ -21,7 +21,7 @@ class Teacher(models.Model):
     fullname.short_description = "Name"
     
     def __unicode__(self):
-        return u"%s %s" % (self.title, self.name)
+        return self.fullname()
 
 class Student(models.Model):
     class Meta:
@@ -38,13 +38,8 @@ class Student(models.Model):
         return self.user.first_name + " " + self.user.last_name
     fullname.short_description = "Name"
     
-    def get_password(self):
-        plain  = "%s.%s" % (self.user.first_name.lower(), self.user.last_name.lower())
-        plain += getattr(settings, "USER_PASSWORD_SECRET")
-        return hashlib.md5(plain).hexdigest()[:8]
-    
     def __unicode__(self):
-        return u"%s - %s" % (self.user, self.get_password())
+        return self.fullname()
 
 class StudentSurvey(models.Model):
     class Meta:
