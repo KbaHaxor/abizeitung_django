@@ -10,6 +10,8 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = "Lehrer"
         verbose_name_plural = "Lehrer"
+        
+        ordering = ["name"]
     
     title = models.CharField(max_length=100, verbose_name="Anrede")
     name = models.CharField(max_length=100, verbose_name="Name")
@@ -25,6 +27,8 @@ class Student(models.Model):
     class Meta:
         verbose_name = u"Schüler"
         verbose_name_plural = u"Schüler"
+        
+        ordering = ["user__first_name", "user__last_name"]
     
     user = models.OneToOneField(User, verbose_name="Benutzer")
     tutor = models.ForeignKey(Teacher, null=True, verbose_name="Tutorengruppe")
@@ -46,6 +50,8 @@ class StudentSurvey(models.Model):
     class Meta:
         verbose_name = u"Schülerumfrage"
         verbose_name_plural = u"Schülerumfragen"
+        
+        ordering = ["title"]
     
     title = models.CharField(max_length=255, verbose_name="Titel")
 
@@ -53,6 +59,8 @@ class TeacherSurvey(models.Model):
     class Meta:
         verbose_name = u"Lehrerumfrage"
         verbose_name_plural = u"Lehrerumfragen"
+        
+        ordering = ["title"]
     
     title = models.CharField(max_length=255, verbose_name="Titel")
 
