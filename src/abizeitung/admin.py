@@ -8,10 +8,10 @@ class TeacherAdmin(admin.ModelAdmin):
     list_display = ("fullname",)
 
 class StudentSurveyAdmin(admin.ModelAdmin):
-    list_display = ("title",)
+    list_display = ("question", "title",)
 
 class TeacherSurveyAdmin(admin.ModelAdmin):
-    list_display = ("title",)
+    list_display = ("question", "title",)
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Teacher, TeacherAdmin)

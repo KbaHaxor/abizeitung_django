@@ -28,14 +28,14 @@ class StudentEditForm(ModelForm):
         
         self.student_surveys = []
         for survey in StudentSurvey.objects.all():
-            field = ChoiceField(label=survey.title, choices=self.student_choices, widget=Select(attrs={"class" : "form-control"}))
+            field = ChoiceField(label=survey.question, choices=self.student_choices, widget=Select(attrs={"class" : "form-control"}))
             name = "student_survey_%s" % survey.id
             self.fields[name] = field
             self.student_surveys.append(self.fields[name])
         
         self.teacher_surveys = []
         for survey in TeacherSurvey.objects.all():
-            field = ChoiceField(label=survey.title, choices=self.teacher_choices, widget=Select(attrs={"class" : "form-control"}))
+            field = ChoiceField(label=survey.question, choices=self.teacher_choices, widget=Select(attrs={"class" : "form-control"}))
             name = "teacher_survey_%s" % survey.id
             self.fields[name] = field
             self.teacher_surveys.append(name)

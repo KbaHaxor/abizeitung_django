@@ -2,3 +2,7 @@
 	width: 200px;
 	text-align: right;
 }
+
+.form-left.form-question {
+	width: 400px;
+}

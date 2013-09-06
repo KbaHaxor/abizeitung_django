@@ -48,6 +48,7 @@ class StudentSurvey(models.Model):
         
         ordering = ["title"]
     
+    question = models.CharField(max_length=255, verbose_name="Frage")
     title = models.CharField(max_length=255, verbose_name="Titel")
 
 class TeacherSurvey(models.Model):
@@ -57,6 +58,7 @@ class TeacherSurvey(models.Model):
         
         ordering = ["title"]
     
+    question = models.CharField(max_length=255, verbose_name="Frage")
     title = models.CharField(max_length=255, verbose_name="Titel")
 
 def create_user_profile(sender, instance, created, **kwargs):
