@@ -2,7 +2,7 @@ from django.contrib import admin
 from abizeitung.models import Student, Teacher, StudentSurvey, TeacherSurvey
 
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ("fullname",)
+    list_display = ("fullname", "tutor",)
 
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ("fullname",)

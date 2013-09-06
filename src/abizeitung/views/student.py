@@ -12,7 +12,7 @@ from django.template.context import RequestContext
 class StudentEditForm(ModelForm):
     class Meta:
         model = Student
-        fields = ["test", ]
+        fields = ["test"]
     
     def __init__(self, *args, **kwargs):
         super(StudentEditForm, self).__init__(*args, **kwargs)
@@ -50,4 +50,5 @@ def edit(request):
         else:
             messages.error(request, "Konnte Daten nicht speichern!")
     context["form"] = form
+    context["student"] = Student.objects.get(user=request.user)
     return render(request, "student/edit.html", context, context_instance=RequestContext(request))

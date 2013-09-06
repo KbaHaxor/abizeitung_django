@@ -14,7 +14,11 @@
     <table class="table table-striped">
         <tr>
             <td class="form-left"><label class="control-label">Name</label></td>
-            <td><p class="form-control-static">{{ user.first_name }} {{ user.last_name }}</p></td>
+            <td><p class="form-control-static">{{ student.fullname }}</p></td>
+        </tr>
+        <tr>
+            <td class="form-left"><label class="control-label">Tutorengruppe</label></td>
+            <td><p class="form-control-static">{{ student.tutor.fullname }}</p></td>
         </tr>
         {% for field in form %}
         {% if not field.auto_id|startswith:"id_teacher_survey" and not field.auto_id|startswith:"id_student_survey" %}
