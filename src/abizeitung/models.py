@@ -53,9 +53,13 @@ class StudentSurvey(models.Model):
         return self.title
 
 class StudentSurveyEntry(models.Model):
-    survey = models.ForeignKey(StudentSurvey, null=True)
-    student = models.ForeignKey(Student, related_name="student")
-    choice = models.ForeignKey(Student, related_name="choice")
+    class Meta:
+        verbose_name = u"Schülerumfrage Eintrag"
+        verbose_name_plural = u"Schülerumfragen Einträge"
+        
+    survey = models.ForeignKey(StudentSurvey, null=True, verbose_name="Schülerumfrage")
+    student = models.ForeignKey(Student, related_name="student", verbose_name="Schüler")
+    choice = models.ForeignKey(Student, related_name="choice", verbose_name="Auswahl")
 
 class TeacherSurvey(models.Model):
     class Meta:
@@ -71,9 +75,13 @@ class TeacherSurvey(models.Model):
         return self.title
 
 class TeacherSurveyEntry(models.Model):
-    survey = models.ForeignKey(TeacherSurvey, null=True)
-    student = models.ForeignKey(Student)
-    choice = models.ForeignKey(Teacher)
+    class Meta:
+        verbose_name = u"Lehrerumfrage Eintrag"
+        verbose_name_plural = u"Lehrerumfragen Einträge"
+    
+    survey = models.ForeignKey(TeacherSurvey, null=True, verbose_name="Lehrerumfrage")
+    student = models.ForeignKey(Student, verbose_name="Schüler")
+    choice = models.ForeignKey(Teacher, verbose_name="Auswahl")
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
