@@ -51,6 +51,10 @@ class StudentSurvey(models.Model):
     question = models.CharField(max_length=255, verbose_name="Frage")
     title = models.CharField(max_length=255, verbose_name="Titel")
 
+class StudentSurveyEntry(models.Model):
+	student = models.ForeignKey(Student, null=True)
+	survey = models.ForeignKey(StudentSurvey, null=True)
+
 class TeacherSurvey(models.Model):
     class Meta:
         verbose_name = u"Lehrerumfrage"
