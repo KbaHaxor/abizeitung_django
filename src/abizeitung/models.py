@@ -39,10 +39,6 @@ class Student(models.Model):
     def __unicode__(self):
         return self.fullname()
 
-class StudentSurveyEntry(models.Model):
-    student = models.ForeignKey(Student, related_name="student")
-    choice = models.ForeignKey(Student, related_name="choice")
-
 class StudentSurvey(models.Model):
     class Meta:
         verbose_name = u"Schülerumfrage"
@@ -52,11 +48,14 @@ class StudentSurvey(models.Model):
     
     question = models.CharField(max_length=255, verbose_name="Frage")
     title = models.CharField(max_length=255, verbose_name="Titel")
-    entries = models.ManyToManyField(StudentSurveyEntry)
+    
+    def __unicode__(self):
+        return self.title
 
-class TeacherSurveyEntry(models.Model):
-    student = models.ForeignKey(Student)
-    choice = models.ForeignKey(Teacher)
+class StudentSurveyEntry(models.Model):
+    survey = models.ForeignKey(StudentSurvey, null=True)
+    student = models.ForeignKey(Student, related_name="student")
+    choice = models.ForeignKey(Student, related_name="choice")
 
 class TeacherSurvey(models.Model):
     class Meta:
@@ -67,7 +66,14 @@ class TeacherSurvey(models.Model):
     
     question = models.CharField(max_length=255, verbose_name="Frage")
     title = models.CharField(max_length=255, verbose_name="Titel")
-    entries = models.ManyToManyField(TeacherSurveyEntry)
+    
+    def __unicode__(self):
+        return self.title
+
+class TeacherSurveyEntry(models.Model):
+    survey = models.ForeignKey(TeacherSurvey, null=True)
+    student = models.ForeignKey(Student)
+    choice = models.ForeignKey(Teacher)
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
