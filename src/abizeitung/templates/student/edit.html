@@ -21,7 +21,7 @@
             <td><p class="form-control-static">{{ student.tutor.fullname }}</p></td>
         </tr>
         {% for field in form %}
-        {% if field.auto_id != "id_picture" and not field.auto_id|startswith:"id_teacher_survey" and not field.auto_id|startswith:"id_student_survey" %}
+        {% if field.auto_id != "id_picture" and field.auto_id != "id_baby_picture" and not field.auto_id|startswith:"id_teacher_survey" and not field.auto_id|startswith:"id_student_survey" %}
         <tr {% if field.errors %}class="has-error"{% endif %}>
             <td class="form-left"><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></td>
             <td>{{ field }}</td>
@@ -41,10 +41,10 @@
                             {% endif %}
                         </td>
                         <td style="width:50%; border: none;">
-                            <div style="text-align: center">{{ form.picture.label_tag }}</div>
-                             <input type="file" name="picture" id="id_picture" />
-                            {% if student.picture %}
-                                <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.picture.url }}" /><br />
+                            <div style="text-align: center">{{ form.baby_picture.label_tag }}</div>
+                             <input type="file" name="baby_picture" id="id_baby_picture" />
+                            {% if student.baby_picture %}
+                                <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.baby_picture.url }}" /><br />
                             {% endif %}
                         </td>
                     </tr>
