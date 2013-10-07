@@ -43,7 +43,7 @@ class Student(models.Model):
     tutor = models.ForeignKey(Teacher, null=True, verbose_name="Tutorengruppe")
     test = models.CharField(default="", blank=True, max_length=255, verbose_name="Test")
     picture = models.ImageField(upload_to=image_filename("student_pictures"), 
-                                default="", blank=True, verbose_name="Foto")
+                                default="", blank=True, verbose_name="Normales Foto")
     
     def fullname(self):
         return self.user.first_name + " " + self.user.last_name

@@ -29,19 +29,22 @@
         {% endif %}
         {% endfor %}
         <tr>
-            <td class="form-left">{{ form.picture.label_tag }}</td>
+            <td class="form-left"><b>Fotos</b></td>
             <td>
-                {{ form.picture }}
                 <table style="with: 100%">
                     <tr>
                         <td style="width: 50%; border: none;">
+                            <div style="text-align: center">{{ form.picture.label_tag }}</div>
+                             <input type="file" name="picture" id="id_picture" />
                             {% if student.picture %}
-                                <img class="img-thumbnail" src="{{ student.picture.url }}" /><br />
+                                <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.picture.url }}" /><br />
                             {% endif %}
                         </td>
                         <td style="width:50%; border: none;">
+                            <div style="text-align: center">{{ form.picture.label_tag }}</div>
+                             <input type="file" name="picture" id="id_picture" />
                             {% if student.picture %}
-                                <img class="img-thumbnail" src="{{ student.picture.url }}" /><br />
+                                <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.picture.url }}" /><br />
                             {% endif %}
                         </td>
                     </tr>
