@@ -1,9 +1,13 @@
-from abizeitung_site.settings import *
+import os
 
-USER_PASSWORD_SECRET = "Sonne2013"
+from abizeitung_site.settings import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
+MEDIA_URL = "/media/"
 
 DATABASES = {
     "default": {
