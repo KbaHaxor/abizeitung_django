@@ -25,7 +25,7 @@ def validate_teacher(value):
 class StudentEditForm(ModelForm):
     class Meta:
         model = Student
-        fields = ["test"]
+        fields = ["test", "picture"]
     
     def __init__(self, *args, **kwargs):
         super(StudentEditForm, self).__init__(*args, **kwargs)
@@ -119,11 +119,12 @@ class StudentEditForm(ModelForm):
                 entry.student = self.instance
                 entry.choice = choice
                 entry.save()
-
+                
 @login_required
 def edit(request):
     context = {}
-    form = StudentEditForm(request.POST or None, instance=Student.objects.get(user=request.user))
+    form = StudentEditForm(request.POST or None, files=request.FILES or None,
+                           instance=Student.objects.get(user=request.user))
     if request.method == "POST":
         if form.is_valid():
             form.save()

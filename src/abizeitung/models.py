@@ -3,6 +3,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import signals
+from django.conf import settings
+import os
 
 class Teacher(models.Model):
     class Meta:
@@ -21,6 +23,15 @@ class Teacher(models.Model):
     def __unicode__(self):
         return self.fullname()
 
+def image_filename(path):
+    def inner(instance, filename):
+        filename = "%s/%s_%s.jpg" % (path, instance.user.first_name.lower(), instance.user.last_name.lower())
+        fullname = os.path.join(settings.MEDIA_ROOT, filename)
+        if os.path.exists(fullname):
+            os.remove(fullname)
+        return filename
+    return inner
+
 class Student(models.Model):
     class Meta:
         verbose_name = u"Schüler"
@@ -31,6 +42,8 @@ class Student(models.Model):
     user = models.OneToOneField(User, verbose_name="Benutzer")
     tutor = models.ForeignKey(Teacher, null=True, verbose_name="Tutorengruppe")
     test = models.CharField(default="", blank=True, max_length=255, verbose_name="Test")
+    picture = models.ImageField(upload_to=image_filename("student_pictures"), 
+                                default="", blank=True, verbose_name="Foto")
     
     def fullname(self):
         return self.user.first_name + " " + self.user.last_name
