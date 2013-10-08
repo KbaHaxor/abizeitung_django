@@ -6,3 +6,8 @@
 .form-left.form-question {
 	width: 400px;
 }
+
+.form-error {
+    padding: 5px;
+    margin-top: 10px;
+}
