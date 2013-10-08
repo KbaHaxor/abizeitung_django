@@ -1,12 +1,10 @@
-import os
-
 from abizeitung_site.settings import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
+ALLOWED_HOSTS = ["localhost"]
+
 MEDIA_URL = "/media/"
 
 DATABASES = {
