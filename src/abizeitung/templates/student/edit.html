@@ -7,7 +7,7 @@
 <form class="form-horizontal" action="/student" method="post" enctype="multipart/form-data">
   {% csrf_token %}
 
-  {{ form.errors }}
+  <!--{{ form.errors }}-->
 
   <fieldset>
     <legend>Steckbrief</legend>
@@ -41,6 +41,10 @@
                         <td style="width: 50%; border: none;">
                             <div style="text-align: center">{{ form.picture.label_tag }}</div>
                             <input type="file" name="picture" id="id_picture" />
+                            <div style="height: 5px"></div>
+                            {% if form.picture.errors %}
+                            <div class="alert alert-danger form-error">{{ form.picture.errors }}</div>
+                            {% endif %} 
                             {% if student.picture %}
                                 <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.picture.url }}" /><br />
                             {% endif %}
@@ -48,6 +52,10 @@
                         <td style="width:50%; border: none;">
                             <div style="text-align: center">{{ form.baby_picture.label_tag }}</div>
                             <input type="file" name="baby_picture" id="id_baby_picture" />
+                            <div style="height: 5px"></div>
+                            {% if form.baby_picture.errors %}
+                            <div class="alert alert-danger form-error">{{ form.baby_picture.errors }}</div>
+                            {% endif %} 
                             {% if student.baby_picture %}
                                 <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.baby_picture.url }}" /><br />
                             {% endif %}
