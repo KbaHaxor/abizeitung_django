@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import signals
 from django.conf import settings
+import hashlib
 import os
 
 class Teacher(models.Model):
@@ -25,7 +26,8 @@ class Teacher(models.Model):
 
 def image_filename(path):
     def inner(instance, filename):
-        filename = "%s/%s_%s.jpg" % (path, instance.user.first_name.lower(), instance.user.last_name.lower())
+        filename = "%s_%s_Sonne2013" % (instance.user.first_name.lower(), instance.user.last_name.lower())
+        filename = path + "/" + hashlib.md5(filename).hexdigest()[:6] + ".jpg"
         fullname = os.path.join(settings.MEDIA_ROOT, filename)
         if os.path.exists(fullname):
             os.remove(fullname)
