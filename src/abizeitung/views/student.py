@@ -43,7 +43,8 @@ class StudentEditForm(ModelForm):
        
         kwargs = lambda survey: {
             "label" : survey.question,
-            "widget" : Select(attrs={"class" : "form-control"}),
+            "widget" : Select(attrs={"class" : "selectpicker",
+                                     "data-live-search" : "true"}),
         }
 
         self.student_surveys = {}
