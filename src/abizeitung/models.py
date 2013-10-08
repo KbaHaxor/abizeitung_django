@@ -27,7 +27,7 @@ class Teacher(models.Model):
 def image_filename(path):
     def inner(instance, filename):
         filename = "%s_%s_Sonne2013" % (instance.user.first_name.lower(), instance.user.last_name.lower())
-        filename = path + "/" + hashlib.md5(filename).hexdigest()[:6] + ".jpg"
+        filename = path + "/" + hashlib.md5(filename).hexdigest()[:12] + ".jpg"
         fullname = os.path.join(settings.MEDIA_ROOT, filename)
         if os.path.exists(fullname):
             os.remove(fullname)
