@@ -19,7 +19,7 @@ def login(request):
         form = AuthenticationForm(None, request.POST)
         if form.is_valid():
             user = form.get_user()
-            print user
+            print(user)
             if user.is_active:
                 do_login(request, user)
                 return redirect("/student")
