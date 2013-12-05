@@ -46,7 +46,7 @@
                             <div class="alert alert-danger form-error">{{ form.picture.errors }}</div>
                             {% endif %} 
                             {% if student.picture %}
-                                <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.picture.url }}" /><br />
+                                <img style="margin-top: 5px; width: 100%" class="img-thumbnail" src="{{ student.picture.url }}" /><br />
                             {% endif %}
                         </td>
                         <td style="width:50%; border: none;">
@@ -57,7 +57,7 @@
                             <div class="alert alert-danger form-error">{{ form.baby_picture.errors }}</div>
                             {% endif %} 
                             {% if student.baby_picture %}
-                                <img style="margin-top: 5px" class="img-thumbnail" src="{{ student.baby_picture.url }}" /><br />
+                                <img style="margin-top: 5px; width: 100%" class="img-thumbnail" src="{{ student.baby_picture.url }}" /><br />
                             {% endif %}
                         </td>
                     </tr>
