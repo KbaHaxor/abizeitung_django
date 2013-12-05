@@ -5,8 +5,6 @@ TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ["localhost"]
 
-MEDIA_URL = "/media/"
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql", # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
@@ -20,3 +18,5 @@ DATABASES = {
 }
 
 SECRET_KEY = "42"
+
+PRODUCTION = "42"
