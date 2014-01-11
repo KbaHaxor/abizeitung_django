@@ -41,7 +41,7 @@ class Student(models.Model):
         
         ordering = ["user__first_name", "user__last_name"]
     
-    user = models.OneToOneField(User, verbose_name="Benutzer")
+    user = models.ForeignKey(User, verbose_name="Benutzer")
     tutor = models.ForeignKey(Teacher, null=True, verbose_name="Tutorengruppe")
     test = models.CharField(default="", blank=True, max_length=255, verbose_name="Test")
     picture = models.ImageField(upload_to=image_filename("student_pictures"), 
