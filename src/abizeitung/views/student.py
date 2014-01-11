@@ -34,7 +34,7 @@ class StudentEditForm(ModelForm):
         
         self.fields["test"].widget.attrs["class"] = "form-control"
         
-        self.student_choices = [(-1, u"Bitte jemanden auswählen."), ("42", "Test")]
+        self.student_choices = [(-1, u"Bitte jemanden auswählen.")]
         for student in Student.objects.all():
             self.student_choices.append((student.pk, student.fullname()))
         self.teacher_choices = [(-1, u"Bitte jemanden auswählen.")]
