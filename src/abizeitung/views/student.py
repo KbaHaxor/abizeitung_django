@@ -25,7 +25,7 @@ def validate_teacher(value):
 class StudentEditForm(ModelForm):
     class Meta:
         model = Student
-        fields = ["test", "picture", "baby_picture"]
+        fields = ["test", "picture", "school_picture"]
     
     def __init__(self, *args, **kwargs):
         super(StudentEditForm, self).__init__(*args, **kwargs)

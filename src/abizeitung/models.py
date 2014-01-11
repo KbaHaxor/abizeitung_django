@@ -46,8 +46,8 @@ class Student(models.Model):
     test = models.CharField(default="", blank=True, max_length=255, verbose_name="Test")
     picture = models.ImageField(upload_to=image_filename("student_pictures"), 
                                 default="", blank=True, verbose_name="Normales Foto")
-    baby_picture = models.ImageField(upload_to=image_filename("baby_pictures"), 
-                                default="", blank=True, verbose_name="Babyfoto")
+    school_picture = models.ImageField(upload_to=image_filename("school_pictures"), 
+                                default="", blank=True, verbose_name="Einschulungsfoto")
     
     def fullname(self):
         return self.user.first_name + " " + self.user.last_name
