@@ -61,7 +61,7 @@ class StudentSurvey(models.Model):
         verbose_name = u"Schülerumfrage"
         verbose_name_plural = u"Schülerumfragen"
         
-        ordering = ["title"]
+        ordering = ["question"]
     
     question = models.CharField(max_length=255, verbose_name="Frage")
     title = models.CharField(max_length=255, verbose_name="Titel")
@@ -83,7 +83,7 @@ class TeacherSurvey(models.Model):
         verbose_name = u"Lehrerumfrage"
         verbose_name_plural = u"Lehrerumfragen"
         
-        ordering = ["title"]
+        ordering = ["question"]
     
     question = models.CharField(max_length=255, verbose_name="Frage")
     title = models.CharField(max_length=255, verbose_name="Titel")
