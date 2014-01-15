@@ -3,7 +3,7 @@ from abizeitung.models import Student, Teacher, StudentSurvey, TeacherSurvey,\
     StudentSurveyEntry, TeacherSurveyEntry
 
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ("fullname", "tutor", "test", "picture", "school_picture")
+    list_display = ("fullname", "tutor", "picture", "school_picture")
 
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ("fullname",)

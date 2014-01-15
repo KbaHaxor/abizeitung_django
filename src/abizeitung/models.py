@@ -43,7 +43,34 @@ class Student(models.Model):
     
     user = models.ForeignKey(User, verbose_name="Benutzer")
     tutor = models.ForeignKey(Teacher, null=True, verbose_name="Tutorengruppe")
-    test = models.CharField(default="", blank=True, max_length=255, verbose_name="Test")
+    
+    lebensmotto = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was ist dein Lebensmotto?")
+    woerter_phrasen = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Welche Wörter/Phrasen benutzt du oft?")
+    lieblingszitat = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was ist dein Lieblingszitat?")
+    biographie = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Wie wäre der Titel deiner Biographie?")
+    hobbies = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was sind deine Hobbies?")
+    lieblingsserie = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was ist deine Lieblingsserie?")
+    lieblingsmusik = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was ist deine Lieblingsmusik?")
+    beschaeftigung_unterricht = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was ist deine Lieblingsbeschäftigung im Unterricht?")
+    wen_vermissen = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was wirst du am meisten vermissen?")
+    ohne_wen_abi_nicht = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Ohne ... hätte ich mein Abi nicht geschafft.")
+    unvergessliche_momente = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was waren unvergessliche Momente in deiner Schulzeit?")
+    lieblingsprodukt_sky = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was ist dein Lieblingsprodukt im Sky?")
+    schlusswort = models.CharField(default="", blank=True, max_length=255,
+        verbose_name="Was ich noch sagen wollte...")
+    
     picture = models.ImageField(upload_to=image_filename("student_pictures"), 
                                 default="", blank=True, verbose_name="Normales Foto")
     school_picture = models.ImageField(upload_to=image_filename("school_pictures"), 

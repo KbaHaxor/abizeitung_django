@@ -12,19 +12,45 @@
   <fieldset>
     <legend>Steckbrief</legend>
     <table class="table table-striped">
-        <tr>
+        <!--<tr>
             <td class="form-left"><label class="control-label">Name</label></td>
             <td><p class="form-control-static">{{ student.fullname }}</p></td>
         </tr>
         <tr>
             <td class="form-left"><label class="control-label">Tutorengruppe</label></td>
             <td><p class="form-control-static">{{ student.tutor.fullname }}</p></td>
+        </tr>-->
+        <tr>
+            <td colspan="2"><label class="control-label">Name</label></td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ student.fullname }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><label class="control-label">Tutorengruppe</label></td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ student.tutor.fullname }}</td>
         </tr>
         {% for field in form %}
         {% if field.auto_id != "id_picture" and field.auto_id != "id_school_picture" and not field.auto_id|startswith:"id_teacher_survey" and not field.auto_id|startswith:"id_student_survey" %}
         <tr {% if field.errors %}class="has-error"{% endif %}>
+            <td colspan="2">
+                <label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+            </td>
+            
+            <!--
             <td class="form-left"><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></td>
             <td>
+                {{ field }}
+                {% if field.errors %}
+                <div class="alert alert-danger form-error">{{ field.error }}</div>
+                {% endif %}
+            </td>
+            -->
+        </tr>
+        <tr {% if field.errors %}class="has-error"{% endif %}>
+            <td colspan="2">
                 {{ field }}
                 {% if field.errors %}
                 <div class="alert alert-danger form-error">{{ field.error }}</div>
@@ -33,6 +59,39 @@
         </tr>
         {% endif %}
         {% endfor %}
+        <tr>
+            <td class="form-left"><label class="control-label">{{ form.picture.label_tag }}</label></td>
+            <td>
+                <div style="height: 5px"></div>
+                {% if form.picture.errors %}
+                <div class="alert alert-danger form-error">{{ form.picture.errors }}</div>
+                {% endif %} 
+                {% if student.picture %}
+                    <div align="center">
+                        <img style="margin-top: 20px; width: 50%" class="img-thumbnail"
+                                src="{{ student.picture.url }}" />
+                        <input type="file" name="picture" id="id_picture" />
+                    </div>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="form-left"><label class="control-label">{{ form.school_picture.label_tag }}</label></td>
+            <td>
+                <div style="height: 5px"></div>
+                {% if form.picture.errors %}
+                <div class="alert alert-danger form-error">{{ form.school_picture.errors }}</div>
+                {% endif %} 
+                {% if student.picture %}
+                    <div align="center">
+                        <img style="margin-top: 20px; width: 50%" class="img-thumbnail"
+                                src="{{ student.school_picture.url }}" />
+                        <input type="file" name="school_picture" id="id_school_picture" />
+                    </div>
+                {% endif %}
+            </td>
+        </tr>
+        <!--
         <tr>
             <td class="form-left"><b>Fotos</b></td>
             <td>
@@ -64,6 +123,7 @@
                 </table>
             </td>
         </tr>
+        -->
     </table>
   </fieldset>
   

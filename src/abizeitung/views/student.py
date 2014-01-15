@@ -25,14 +25,30 @@ def validate_teacher(value):
 class StudentEditForm(ModelForm):
     class Meta:
         model = Student
-        fields = ["test", "picture", "school_picture"]
+        fields = [
+            "lebensmotto",
+            "woerter_phrasen",
+            "lieblingszitat",
+            "biographie",
+            "hobbies",
+            "lieblingsserie",
+            "lieblingsmusik",
+            "beschaeftigung_unterricht",
+            "wen_vermissen",
+            "ohne_wen_abi_nicht",
+            "unvergessliche_momente",
+            "lieblingsprodukt_sky",
+            "schlusswort",
+            "picture", "school_picture"
+        ]
     
     def __init__(self, *args, **kwargs):
         super(StudentEditForm, self).__init__(*args, **kwargs)
         
         self.instance = kwargs["instance"]
         
-        self.fields["test"].widget.attrs["class"] = "form-control"
+        for field in StudentEditForm.Meta.fields:
+            self.fields[field].widget.attrs["class"] = "form-control"
         
         self.student_choices = [(-1, u"Bitte jemanden auswählen.")]
         for student in Student.objects.all():
@@ -124,6 +140,8 @@ class StudentEditForm(ModelForm):
                 
 @login_required
 def edit(request):
+    messages.info(request, "Bitte unten speichern nicht vergessen!")
+    
     context = {}
     form = StudentEditForm(request.POST or None, files=request.FILES or None,
                            instance=Student.objects.get(user=request.user))
