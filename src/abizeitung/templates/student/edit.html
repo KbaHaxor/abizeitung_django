@@ -62,7 +62,6 @@
         <tr>
             <td class="form-left"><label class="control-label">{{ form.picture.label_tag }}</label></td>
             <td>
-                <div style="height: 5px"></div>
                 {% if form.picture.errors %}
                 <div class="alert alert-danger form-error">{{ form.picture.errors }}</div>
                 {% endif %} 
@@ -80,11 +79,10 @@
         <tr>
             <td class="form-left"><label class="control-label">{{ form.school_picture.label_tag }}</label></td>
             <td>
-                <div style="height: 5px"></div>
-                {% if form.picture.errors %}
+                {% if form.school_picture.errors %}
                 <div class="alert alert-danger form-error">{{ form.school_picture.errors }}</div>
                 {% endif %} 
-                {% if student.picture %}
+                {% if student.school_picture %}
                     <div align="center">
                         <img style="margin-top: 20px; width: 50%" class="img-thumbnail"
                                 src="{{ student.school_picture.url }}" />
