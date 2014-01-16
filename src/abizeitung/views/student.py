@@ -140,7 +140,7 @@ class StudentEditForm(ModelForm):
                 
 @login_required
 def edit(request):
-    messages.info(request, "Bitte unten speichern nicht vergessen!")
+    messages.info(request, "Bitte unten speichern nicht vergessen!<br /><br />Bei Fragen oder Problem bitte per E-Mail an <a href=\"mailto:abiumfrage-support@mapcrafter.org\">abiumfrage-support@mapcrafter.org</a> wenden.")
     
     context = {}
     form = StudentEditForm(request.POST or None, files=request.FILES or None,
