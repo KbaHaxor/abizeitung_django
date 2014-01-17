@@ -59,9 +59,9 @@ class StudentEditForm(ModelForm):
        
         kwargs = lambda survey: {
             "label" : survey.question,
-            "widget" : Select(attrs={"class" : "selectpicker",
-                                     "data-live-search" : "true",
-                                     "data-size" : "10"}),
+            "widget" : Select(attrs={"class" : "selectpicker",})
+                                     #"data-live-search" : "true",
+                                     #"data-size" : "10"}),
         }
 
         self.student_surveys = {}
@@ -154,3 +154,8 @@ def edit(request):
     context["form"] = form
     context["student"] = Student.objects.get(user=request.user)
     return render(request, "student/edit.html", context, context_instance=RequestContext(request))
+
+@login_required
+def evaluation(request):
+    context = {}
+    return render(request, "student/evaluation.html", context, context_instance=RequestContext(request))
