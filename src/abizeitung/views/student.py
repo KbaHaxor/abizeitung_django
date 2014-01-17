@@ -168,7 +168,7 @@ def evaluation(request):
             all_profiles += 1
             if value:
                 value_profiles += 1
-    percentage_profiles = round(float(value_profiles) / all_profiles, 2)
+    percentage_profiles = round(float(value_profiles) / all_profiles * 100, 2)
     
     progress["all_profiles"] = all_profiles
     progress["value_profiles"] = value_profiles
