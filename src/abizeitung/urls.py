@@ -10,7 +10,8 @@ urlpatterns = patterns('',
     url(r"^logout", "abizeitung.views.session.logout"),
     
     url(r"^$", RedirectView.as_view(url="/student")),
-    url(r"^student$", "abizeitung.views.student.edit")
+    url(r"^student$", "abizeitung.views.student.edit"),
+    url(r"^evaluation", "abizeitung.views.student.evaluation"),
     
     # Examples:
     # url(r'^$', 'abizeitung.views.home', name='home'),
