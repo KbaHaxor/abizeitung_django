@@ -33,11 +33,11 @@
     <tr>
         <td class="form-left form-question"><label class="control-label">{{ survey.question }}</label></td>
         <td>
-            {% for student in survey.students %}
             <ol>
+            {% for student in survey.students %}
                 <li>{{ student.name }} ({{ student.votes }} Stimme(n))</li>
-            </ol>
             {% endfor %}
+            </ol>
         </td>
     </tr>
     {% endfor %}
@@ -49,11 +49,11 @@
     <tr>
         <td class="form-left form-question"><label class="control-label">{{ survey.question }}</label></td>
         <td>
-            {% for teacher in survey.teachers %}
             <ol>
+            {% for teacher in survey.teachers %}
                 <li>{{ teacher.name }} ({{ teacher.votes }} Stimme(n))</li>
-            </ol>
             {% endfor %}
+            </ol>
         </td>
     </tr>
     {% endfor %}
