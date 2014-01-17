@@ -56,6 +56,12 @@
           <a class="navbar-brand">Abizeitung</a>
         </div>
         <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="{% url "abizeitung.views.student.edit" %}">Umfrage</a></li>
+            {% if user.is_staff %}
+            <li><a href="{% url "abizeitung.views.student.evaluation" %}">Auswertung</a></li>
+            {% endif %}
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a>{{ user.first_name }} {{ user.last_name }}</a></li>
             <li><a href="{% url "abizeitung.views.session.logout" %}">Ausloggen</a></li>
