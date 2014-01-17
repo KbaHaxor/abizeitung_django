@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load abizeitung_tags %}
+
+{% block content %}
+
+<h3>Schülertitel</h3>
+<table class="table table-striped">
+    {% for survey in student_surveys %}
+    <tr>
+        <td class="form-left form-question"><label class="control-label">{{ survey.question }}</label></td>
+        <td>
+            {% for student in survey.students %}
+            <ol>
+                <li>{{ student.name }} ({{ student.votes }} Stimme(n))</li>
+            </ol>
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Lehrertitel</h3>
+<table class="table table-striped">
+    {% for survey in teacher_surveys %}
+    <tr>
+        <td class="form-left form-question"><label class="control-label">{{ survey.question }}</label></td>
+        <td>
+            {% for teacher in survey.teachers %}
+            <ol>
+                <li>{{ teacher.name }} ({{ teacher.votes }} Stimme(n))</li>
+            </ol>
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -9,6 +9,7 @@ from django.forms.fields import ChoiceField
 from django.forms.models import ModelForm
 from django.shortcuts import render
 from django.template.context import RequestContext
+from django.contrib.admin.views.decorators import staff_member_required
 
 def validate_student(value):
     if value == "-1":
@@ -156,6 +157,43 @@ def edit(request):
     return render(request, "student/edit.html", context, context_instance=RequestContext(request))
 
 @login_required
+@staff_member_required
 def evaluation(request):
+    student_surveys = []
+    students = Student.objects.all()
+    for survey in StudentSurvey.objects.all():
+        survey_obj = {"question" : survey.question}
+        students_obj = []
+        
+        for student in students:
+            students_obj.append({
+                "name" : student.fullname(),
+                "votes" : StudentSurveyEntry.objects.all().filter(survey=survey, choice=student).count(),
+            })
+        
+        students_obj.sort(key=lambda student: student["votes"], reverse=True)
+        students_obj = filter(lambda student: student["votes"] != 0, students_obj)
+        survey_obj["students"] = students_obj[:5]
+        student_surveys.append(survey_obj)
+    
+    teacher_surveys = []
+    teachers = Teacher.objects.all()
+    for survey in TeacherSurvey.objects.all():
+        survey_obj = {"question" : survey.question}
+        teachers_obj = []
+        
+        for teacher in teachers:
+            teachers_obj.append({
+                "name" : teacher.fullname(),
+                "votes" : TeacherSurveyEntry.objects.all().filter(survey=survey, choice=teacher).count(),
+            })
+        
+        teachers_obj.sort(key=lambda teacher: teacher["votes"], reverse=True)
+        teachers_obj = filter(lambda teacher: teacher["votes"] != 0, teachers_obj)
+        survey_obj["teachers"] = teachers_obj[:5]
+        teacher_surveys.append(survey_obj)
+    
     context = {}
+    context["student_surveys"] = student_surveys
+    context["teacher_surveys"] = teacher_surveys
     return render(request, "student/evaluation.html", context, context_instance=RequestContext(request))
