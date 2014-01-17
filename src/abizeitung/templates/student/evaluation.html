@@ -4,6 +4,23 @@
 
 {% block content %}
 
+<h3>Insgesamt</h3>
+
+<ul>
+    <li>
+        Schülerumfragen:
+        <ul>
+            <li>{{ progress.value_student_surveys }} von {{ progress.all_student_surveys}} Einträgen: {{ progress.percentage_student_surveys }}%</li>
+        </ul>
+    </li>
+    <li>
+        Lehrerumfragen:
+        <ul>
+            <li>{{ progress.value_teacher_surveys }} von {{ progress.all_teacher_surveys}} Einträgen: {{ progress.percentage_teacher_surveys }}%</li>
+        </ul>
+    </li>
+</ul>
+
 <h3>Schülertitel</h3>
 <table class="table table-striped">
     {% for survey in student_surveys %}

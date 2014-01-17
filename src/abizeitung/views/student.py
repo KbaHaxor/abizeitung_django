@@ -159,6 +159,15 @@ def edit(request):
 @login_required
 @staff_member_required
 def evaluation(request):
+    progress = {}
+    progress["all_students"] = Student.objects.count()
+    progress["all_student_surveys"] = StudentSurvey.objects.count() * progress["all_students"]
+    progress["value_student_surveys"] = StudentSurveyEntry.objects.count()
+    progress["percentage_student_surveys"] = round(float(progress["value_student_surveys"]) / progress["all_student_surveys"] * 100, 2)
+    progress["all_teacher_surveys"] = TeacherSurvey.objects.count() * progress["all_students"]
+    progress["value_teacher_surveys"] = TeacherSurveyEntry.objects.count()
+    progress["percentage_teacher_surveys"] = round(float(progress["value_teacher_surveys"]) / progress["all_teacher_surveys"] * 100, 2)
+    
     student_surveys = []
     students = Student.objects.all()
     for survey in StudentSurvey.objects.all():
@@ -194,6 +203,7 @@ def evaluation(request):
         teacher_surveys.append(survey_obj)
     
     context = {}
+    context["progress"] = progress
     context["student_surveys"] = student_surveys
     context["teacher_surveys"] = teacher_surveys
     return render(request, "student/evaluation.html", context, context_instance=RequestContext(request))
