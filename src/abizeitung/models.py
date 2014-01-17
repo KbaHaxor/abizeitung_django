@@ -80,6 +80,28 @@ class Student(models.Model):
         return self.user.first_name + " " + self.user.last_name
     fullname.short_description = "Name"
     
+    def get_profile_fields(self):
+        fields = [
+            "lebensmotto",
+            "woerter_phrasen",
+            "lieblingszitat",
+            "biographie",
+            "hobbies",
+            "lieblingsserie",
+            "lieblingsmusik",
+            "beschaeftigung_unterricht",
+            "wen_vermissen",
+            "ohne_wen_abi_nicht",
+            "unvergessliche_momente",
+            "lieblingsprodukt_sky",
+            "schlusswort",
+        ]
+        
+        values = {}
+        for field in fields:
+            values[field] = getattr(self, field)
+        return values
+    
     def __unicode__(self):
         return self.fullname()
 
