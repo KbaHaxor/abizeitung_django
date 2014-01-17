@@ -160,16 +160,29 @@ def edit(request):
 @staff_member_required
 def evaluation(request):
     progress = {}
-    progress["all_students"] = Student.objects.count()
-    progress["all_student_surveys"] = StudentSurvey.objects.count() * progress["all_students"]
+    
+    all_profiles, value_profiles, percentage_profiles = 0, 0, 0
+    students = Student.objects.all()
+    for student in students:
+        for field, value in student.get_profile_fields().items():
+            all_profiles += 1
+            if value:
+                value_profiles += 1
+    percentage_profiles = round(float(value_profiles) / all_profiles, 2)
+    
+    progress["all_profiles"] = all_profiles
+    progress["value_profiles"] = value_profiles
+    progress["percentage_profiles"] = percentage_profiles
+    
+    progress["all_student_surveys"] = StudentSurvey.objects.count() * students.count()
     progress["value_student_surveys"] = StudentSurveyEntry.objects.count()
     progress["percentage_student_surveys"] = round(float(progress["value_student_surveys"]) / progress["all_student_surveys"] * 100, 2)
-    progress["all_teacher_surveys"] = TeacherSurvey.objects.count() * progress["all_students"]
+    
+    progress["all_teacher_surveys"] = TeacherSurvey.objects.count() * students.count()
     progress["value_teacher_surveys"] = TeacherSurveyEntry.objects.count()
     progress["percentage_teacher_surveys"] = round(float(progress["value_teacher_surveys"]) / progress["all_teacher_surveys"] * 100, 2)
     
     student_surveys = []
-    students = Student.objects.all()
     for survey in StudentSurvey.objects.all():
         survey_obj = {"question" : survey.question}
         students_obj = []
