@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r"^$", RedirectView.as_view(url="/student")),
     url(r"^student$", "abizeitung.views.student.edit"),
     url(r"^evaluation", "abizeitung.views.student.evaluation"),
+    url(r"^export", "abizeitung.views.student.export"),
     
     # Examples:
     # url(r'^$', 'abizeitung.views.home', name='home'),

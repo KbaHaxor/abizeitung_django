@@ -60,6 +60,7 @@
             <li><a href="{% url "abizeitung.views.student.edit" %}">Umfrage</a></li>
             {% if user.is_staff %}
             <li><a href="{% url "abizeitung.views.student.evaluation" %}">Auswertung</a></li>
+            <li><a href="{% url "abizeitung.views.student.export" %}">Export</a></li>
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">

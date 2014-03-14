@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load abizeitung_tags %}
+
+{% block content %}
+
+<h3>Export</h3>
+
+<form action="{% url "abizeitung.views.student.export" %}" method="post" role="form">{% csrf_token %}
+  <fieldset>
+    <table class="table table-striped">
+      <tr>
+        <td>
+          <label class="control-label" for="{{ form.template.auto_id }}">{{ form.template.label }}</label>
+        </td>
+      </tr>
+      
+      <tr {% if field.errors %}class="has-error"{% endif %}>
+        <td>
+            {{ form.template }}
+            {% if form.template.errors %}
+            <div class="alert alert-danger form-error">{{ form.template.error }}</div>
+            {% endif %}
+        </td>
+      </tr>
+  
+    </table>
+    <button type="submit" class="btn btn-primary btn-lg">Export</button>
+  </fieldset>
+</form>
+
+<hr />
+
+{{ export }}
+
+{% endblock %}

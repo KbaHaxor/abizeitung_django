@@ -5,11 +5,16 @@ from abizeitung.models import Teacher, StudentSurvey, Student, TeacherSurvey,\
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms import Select, ValidationError
-from django.forms.fields import ChoiceField
+from django.forms.fields import ChoiceField, CharField
 from django.forms.models import ModelForm
 from django.shortcuts import render
-from django.template.context import RequestContext
+from django.template.context import RequestContext, Context
 from django.contrib.admin.views.decorators import staff_member_required
+from django.forms.forms import Form
+from django.utils.safestring import mark_safe
+from django.db.models.fields import TextField
+from django.forms.widgets import Textarea
+from django.template.base import Template
 
 def validate_student(value):
     if value == "-1":
@@ -164,7 +169,7 @@ def evaluation(request):
     all_profiles, value_profiles, percentage_profiles = 0, 0, 0
     students = Student.objects.all()
     for student in students:
-        for field, value in student.get_profile_fields().items():
+        for field, value in student.get_profile_fields():
             all_profiles += 1
             if value:
                 value_profiles += 1
@@ -220,3 +225,34 @@ def evaluation(request):
     context["student_surveys"] = student_surveys
     context["teacher_surveys"] = teacher_surveys
     return render(request, "student/evaluation.html", context, context_instance=RequestContext(request))
+
+class ExportTemplateForm(Form):
+    template = CharField(required=False, widget=Textarea(attrs={"class" : "form-control",}))
+
+DEFAULT_TEMPLATE = """<pre>{{ students }}</pre>"""
+
+@login_required
+@staff_member_required
+def export(request):
+    context = {}
+    
+    template = DEFAULT_TEMPLATE
+    
+    form = ExportTemplateForm(initial=dict(template=DEFAULT_TEMPLATE))
+    if request.POST:
+        form = ExportTemplateForm(request.POST)
+        if form.is_valid():
+            template = form.cleaned_data["template"]
+    
+    students = []
+    for student in Student.objects.all().order_by("user__username"):
+        current = dict(name=student.fullname())
+        current["profile"] = student.get_profile_fields()
+        
+        students.append(current)
+    
+    export = mark_safe(Template(template).render(Context(dict(students=students))))
+    
+    context["form"] = form
+    context["export"] = export
+    return render(request, "student/export.html", context, context_instance=RequestContext(request))

@@ -97,9 +97,9 @@ class Student(models.Model):
             "schlusswort",
         ]
         
-        values = {}
+        values = []
         for field in fields:
-            values[field] = getattr(self, field)
+            values.append((field, getattr(self, field)))
         return values
     
     def __unicode__(self):
