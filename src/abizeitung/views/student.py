@@ -229,7 +229,24 @@ def evaluation(request):
 class ExportTemplateForm(Form):
     template = CharField(required=False, widget=Textarea(attrs={"class" : "form-control",}))
 
-DEFAULT_TEMPLATE = """<pre>{{ students }}</pre>"""
+DEFAULT_TEMPLATE = """
+<ul>
+{% for student in students %}
+
+<li>
+  <b>Name:</b> {{ student.name }}
+  <ul>
+  {% for key, value in student.profile %}
+    <li><b>{{ key }}:</b> {{ value }}</li>
+  {% endfor %}
+  </ul>
+</li>
+
+{% endfor %}
+</ul>
+
+<!--<pre>{{ students }}</pre>-->
+"""
 
 @login_required
 @staff_member_required
