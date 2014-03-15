@@ -235,11 +235,11 @@ DEFAULT_TEMPLATE = """{% for student in students %}
 
 <!--
 <div style="width: 200px; float: right">
-{% if student.picture %}
-<div><img src="{{ student.picture }}" style="max-width: 200px" /></div><br />
-{% endif %}
 {% if student.school_picture %}
-<div><img src="{{ student.school_picture }}" style="max-width: 200px" /></div>
+<div><img src="{{ student.school_picture }}" style="max-width: 200px" /></div><br />
+{% endif %}
+{% if student.picture %}
+<div><img src="{{ student.picture }}" style="max-width: 200px" /></div>
 {% endif %}
 </div>
 -->
