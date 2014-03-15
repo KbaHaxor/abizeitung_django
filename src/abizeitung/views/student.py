@@ -245,8 +245,8 @@ DEFAULT_TEMPLATE = """{% for student in students %}
 -->
 
 <ul>
-{% for key, value in student.profile %}
-  <li><b>{{ key }}:</b> {{ value }}</li>
+{% for field, field_pretty, value in student.profile %}
+  <li><b>{{ field_pretty }}:</b> {{ value }}</li>
 {% endfor %}
 <div style="clear: both"></div>
 <hr />
@@ -272,7 +272,7 @@ def export(request):
     students = []
     for student in Student.objects.all().order_by("user__username"):
         current = dict(name=student.fullname())
-        current["profile"] = student.get_profile_fields()
+        current["profile"] = student.get_pretty_profile_fields()
         
         if student.picture:
             current["picture"] = student.picture.url

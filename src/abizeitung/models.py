@@ -101,6 +101,28 @@ class Student(models.Model):
         for field in fields:
             values.append((field, getattr(self, field)))
         return values
+
+    def get_pretty_profile_fields(self):
+        fields = [
+            ("lebensmotto", "Lebensmotto"),
+            ("woerter_phrasen", "Oft benutzte Wörter/Phrasen"),
+            ("lieblingszitat", "Lieblingszitat"),
+            ("biographie", "Wäre der Titel der Biographie"),
+            ("hobbies", "Hobbies"),
+            ("lieblingsserie", "Lieblingsserie"),
+            ("lieblingsmusik", "Lieblingsmusik"),
+            ("beschaeftigung_unterricht", "Lieblingsbeschäftigung im Unterricht"),
+            ("wen_vermissen", "Wird ... am meisten vermissen"),
+            ("ohne_wen_abi_nicht", "Hätte ohne ... das Abi nicht"),
+            ("unvergessliche_momente", "Unvergessliche Momente in der Schulzeit"),
+            ("lieblingsprodukt_sky", "Lieblingsprodukt im Sky"),
+            ("schlusswort", "Schlusswort"),
+        ]
+        
+        values = []
+        for field, field_pretty in fields:
+            values.append((field, field_pretty, getattr(self, field)))
+        return values
     
     def __unicode__(self):
         return self.fullname()
