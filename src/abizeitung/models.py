@@ -113,7 +113,7 @@ class Student(models.Model):
             ("lieblingsmusik", "Lieblingsmusik"),
             ("beschaeftigung_unterricht", "Lieblingsbeschäftigung im Unterricht"),
             ("wen_vermissen", "Wird ... am meisten vermissen"),
-            ("ohne_wen_abi_nicht", "Hätte ohne ... das Abi nicht"),
+            ("ohne_wen_abi_nicht", "Hätte ohne ... das Abi nicht geschafft"),
             ("unvergessliche_momente", "Unvergessliche Momente in der Schulzeit"),
             ("lieblingsprodukt_sky", "Lieblingsprodukt im Sky"),
             ("schlusswort", "Schlusswort"),
