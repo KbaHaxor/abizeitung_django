@@ -266,6 +266,11 @@ def export(request):
         current = dict(name=student.fullname())
         current["profile"] = student.get_profile_fields()
         
+        if student.picture:
+            current["picture"] = student.picture.url
+        if student.school_picture:
+            current["school_picture"] = student.school_picture.url
+        
         students.append(current)
     
     export = mark_safe(Template(template).render(Context(dict(students=students))))
