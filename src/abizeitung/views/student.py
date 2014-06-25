@@ -273,6 +273,9 @@ def export(request):
     for student in Student.objects.all().order_by("user__username"):
         current = dict(name=student.fullname())
         current["profile"] = student.get_pretty_profile_fields()
+        current["vorname"] = student.user.first_name
+        current["nachname"] = student.user.last_name
+        current["tutorengruppe"] = student.tutor.name
         
         if student.picture:
             current["picture"] = student.picture.url
